@@ -8,27 +8,51 @@ public class CustomerService {
         // var cs = new CustomerService(10);
         // Console.WriteLine(cs);
 
+        var cs = new CustomerService(3);
+        cs._queue.Add(new Customer("Alice", "A100", "Password reset"));
+
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Serve one customer from the queue.
+        // Expected Result: The first customer is displayed and removed from the queue.
         Console.WriteLine("Test 1");
-       
+        cs.ServeCustomer();
+
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Dequeue from an empty queue.
+        // Expected Result: A message indicating no customers are in the queue.
         Console.WriteLine("Test 2");
+
+        if (cs._queue.Count <= 0) {
+            Console.WriteLine("No Customers in the queue");
+        }
 
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
-        // Add more Test Cases As Needed Below
+        // Test 3
+        // Scenario: Fill the queue to maximum capacity.
+        // Expected Result: The queue reports it is full.
+        Console.WriteLine("Test 3");
+        cs._queue.Clear();
+        for (int i = 0; i < cs._maxSize; i++) {
+            cs._queue.Add(new Customer($"Customer{i + 1}", $"ID{i + 1:000}", "Sample problem"));
+        }
+
+        if (cs._queue.Count >= cs._maxSize) {
+            Console.WriteLine("Maximum Number of Customers in Queue.");
+        }
+
+        // Defect(s) Found:
+
+        Console.WriteLine("=================");
+
     }
 
     private readonly List<Customer> _queue = new();
